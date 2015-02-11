@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html data-ng-app="myapp">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+<script src="bootstrap/js/jquery-2.1.3.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/angular/angular.min.js"></script>
+<script type="text/javascript" src="js/script/controller/controller.js"></script>
+</head>
+<body data-ng-controller="EmpController" data-ng-init="num=10">
+	<!-- start main container -->
+	<div class="container">
+		
+			<!-- start controller -->
+			<div class="row " style="background-color: black">
+				<!-- start first row -->
+				<div class="col-md-4 col-xs-12" style="background-color: black">
+					<h2>Project Name</h2>
+				</div>
+				<div class="col-md-4 col-xs-12" style="background-color: black"></div>
+				<div class="col-md-4 col-xs-12" style="background-color: black">
+					<input type="text" placeholder="Search" style="margin-top: 6px">
+					<h4>Dashboard User</h4>
+				</div>
+			</div>
+			<!-- end first row -->
+			<div class="row ">
+				<div class="col-md-12 col-xs-12">
+					<h1>Dashboard</h1>
+				</div>
+			</div>
+			<div class="row">
+				<!-- start second row-->
+				<div class="col-md-2 col-xs-12"></div>
+				<div class="col-md-3 col-xs-12">
+					<label>limit</label> <select data-ng-model="num">
+						<option value="5">5</option>
+						<option value="10">10</option>
+						<option value="30">30</option>
+						<option value="50">50</option>
+					</select>
+				</div>
+				<div class="col-md-3 col-xs-12">
+					<label>Sort</label> <select data-ng-model="orderByField">
+						<option value="name">name</option>
+						<option value="company">company</option>
+						<option value="email">email</option>
+					</select>
+				</div>
+				<div class="col-md-4 col-xs-12">
+					<label>Search</label><input type="text" placeholder="Search"
+						data-ng-model="searchText">
+				</div>
+			</div>
+			<!-- end second row -->
+			<div class="row">
+				<!-- start third row  -->
+				<div class="col-md-12 col-xs-12">
+					<table 
+						class="table table-striped table table-bordered">
+						<thead>
+							<tr>
+					<!-- adding sort on click -->
+					<th data-ng-click="Sort('name')">Name</th>
+					<th data-ng-click="Sort('company')">Company</th>
+					<th data-ng-click="Sort('email')">Email</th>
+					<th data-ng-click="Sort('phone')">Phone</th>
+					<th data-ng-click="Sort('date')">Date</th>
+				</tr>
+				<!-- Rendering Employee Records data by filtering with given fields -->
+				<tr
+					data-ng-repeat="x in results|limitTo:num|orderBy:orderByField|filter:searchText">
+					<td>{{x.name}}</td>
+					<td>{{x.company}}</td>
+					<td>{{x.email}}</td>
+					<td>{{x.phone}}</td>
+					<td>{{x.date |date:'medium'}}</td>
+				</tr>
+						</thead>
+					</table>
+				</div>
+				<!-- end . third row  -->
+		</div>
+		<!-- end .container --> 
+	</div>
+</body>
+</html>
